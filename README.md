@@ -38,13 +38,32 @@ site's own SVG, and the palette and typography are taken from its stylesheet.
 IBM Plex Mono is added for model numbers, so strings like `T535916-4G-2MB`
 are read correctly on a phone.
 
+## Hosting
+
+The QR code points at GitHub Pages, not at a Claude artifact - a contractor
+scanning a sign must not be asked to log in to anything.
+
+    https://kgaleano-ux.github.io/Waterview/
+
+To turn it on: repository **Settings -> Pages -> Source: Deploy from a branch**,
+pick this repository's default branch and the `/ (root)` folder, then Save.
+The first build takes a minute or two.
+
+`index.html` is the copy Pages serves. It carries `noindex, nofollow` so the
+specifications do not turn up in search results. Note the repository itself is
+public, so anything committed here is publicly readable.
+
 ## Rebuilding
 
 ```
-python3 src/extract.py     # workbook  -> data/specs.json
-python3 src/build.py       # template  -> build-book.html
-python3 src/build_sign.py  # QR + logo -> site-sign.html
+python3 src/extract.py     # workbook   -> data/specs.json
+python3 src/build.py       # template   -> build-book.html + index.html
+node     src/build_qr.js   # target URL -> qr/  (needs: npm install qrcode)
+python3 src/build_sign.py  # QR + logo  -> site-sign.html
 ```
+
+The QR target lives in `src/build_qr.js`. Changing it means reprinting every
+sign already hung, so leave it alone unless the book genuinely moves.
 
 ## Where the data comes from
 

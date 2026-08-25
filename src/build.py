@@ -27,6 +27,14 @@ def main():
     open(dest, 'w').write(out)
     print('wrote %s (%d bytes)' % (dest, len(out)))
 
+    # GitHub Pages serves the same page at the site root. It carries a noindex
+    # tag so a client's specifications don't turn up in search results.
+    noindex = '<meta name="robots" content="noindex, nofollow">\n'
+    viewport = '<meta name="viewport" content="width=device-width, initial-scale=1">\n'
+    page = os.path.join(ROOT, 'index.html')
+    open(page, 'w').write(noindex + viewport + out)
+    print('wrote %s (%d bytes)' % (page, len(out)))
+
 
 if __name__ == '__main__':
     main()
