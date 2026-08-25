@@ -1,0 +1,616 @@
+<title>Waterview Build Book</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap">
+
+<style>
+/* ------------------------------------------------------------------
+   Achristavest brand system, taken from achristavest.com:
+   dove #7cb2ca / #7eb7d0, wordmark grey #58595b, deep teal #003b49,
+   heading blue #6c93a6, tints #e9f0f3 / #cee3eb / #dcedf4,
+   Cinzel headings + Open Sans body.
+   ------------------------------------------------------------------ */
+:root{
+  --dove:#7cb2ca; --blue:#7eb7d0; --deep:#003b49; --slate:#61718a;
+  --head:#6c93a6; --grey:#58595b;
+  --ground:#FFFFFF; --band:#e9f0f3; --panel:#FFFFFF; --tint:#dcedf4; --tint-2:#cee3eb;
+  --ink:#3c3d3f; --ink-2:#6b6c6f; --ink-3:#95999c;
+  --line:#dbe5ea; --hair:#7cb2ca; --line-soft:#e8eef1;
+  --accent:#4d8ba6; --accent-ink:#3d7a95;
+  --open:#b32d3c; --open-bg:#fbecec;
+  --done:#00596b; --done-bg:#e2eff2;
+  --shadow:0 1px 2px rgba(0,59,73,.05), 0 6px 18px rgba(0,59,73,.05);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --dove:#7cb2ca; --blue:#8dc0d6; --deep:#a9d3e0; --slate:#93a3bb;
+    --head:#8fc0d4; --grey:#c9cbcd;
+    --ground:#13181B; --band:#182025; --panel:#1B2429; --tint:#1c2c33; --tint-2:#20323a;
+    --ink:#E4E6E7; --ink-2:#A6AFB4; --ink-3:#7b868c;
+    --line:#2b383e; --hair:#3f6474; --line-soft:#232f34;
+    --accent:#8dc0d6; --accent-ink:#a2cfe2;
+    --open:#e98b83; --open-bg:#33201f;
+    --done:#7fbcc9; --done-bg:#16292f;
+    --shadow:0 1px 2px rgba(0,0,0,.4), 0 6px 18px rgba(0,0,0,.32);
+  }
+}
+:root[data-theme="dark"]{
+  --dove:#7cb2ca; --blue:#8dc0d6; --deep:#a9d3e0; --slate:#93a3bb;
+  --head:#8fc0d4; --grey:#c9cbcd;
+  --ground:#13181B; --band:#182025; --panel:#1B2429; --tint:#1c2c33; --tint-2:#20323a;
+  --ink:#E4E6E7; --ink-2:#A6AFB4; --ink-3:#7b868c;
+  --line:#2b383e; --hair:#3f6474; --line-soft:#232f34;
+  --accent:#8dc0d6; --accent-ink:#a2cfe2;
+  --open:#e98b83; --open-bg:#33201f;
+  --done:#7fbcc9; --done-bg:#16292f;
+  --shadow:0 1px 2px rgba(0,0,0,.4), 0 6px 18px rgba(0,0,0,.32);
+}
+
+*{box-sizing:border-box}
+[hidden]{display:none !important}
+body{
+  margin:0; background:var(--ground); color:var(--ink);
+  font-family:"Open Sans",-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;
+  font-size:16px; font-weight:400; line-height:1.55; -webkit-text-size-adjust:100%;
+}
+h1,h2,h3,h4{margin:0; text-wrap:balance}
+p{margin:0}
+a{color:var(--accent-ink); text-underline-offset:3px}
+button{font:inherit; color:inherit}
+:focus-visible{outline:2px solid var(--accent); outline-offset:2px; border-radius:3px}
+
+.cinzel{font-family:Cinzel,Georgia,"Times New Roman",serif}
+.mono{font-family:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,monospace}
+.eyebrow{
+  font-family:Cinzel,Georgia,serif; font-size:11.5px; font-weight:600;
+  letter-spacing:.16em; text-transform:uppercase; color:var(--head);
+}
+.wrap{max-width:840px; margin:0 auto; padding:0 18px}
+
+/* ---------- brand bar ---------- */
+.brandbar{
+  background:var(--ground); border-bottom:1px solid var(--line-soft);
+  padding:14px 0 12px;
+}
+.brandbar .in{max-width:840px; margin:0 auto; padding:0 18px; display:flex; justify-content:center}
+.lockup{width:186px; height:auto; display:block; --logo-bird:var(--dove); --logo-type:var(--grey)}
+
+/* ---------- sticky tools ---------- */
+.bar{position:sticky; top:0; z-index:20; background:var(--ground); border-bottom:1px solid var(--line)}
+.bar-in{display:flex; align-items:center; gap:10px; max-width:840px; margin:0 auto; padding:10px 18px}
+.back{
+  display:inline-flex; align-items:center; gap:7px; flex:none; cursor:pointer;
+  background:var(--ground); border:1px solid var(--hair); border-radius:2px;
+  padding:0 14px; min-height:42px; text-decoration:none; color:var(--deep);
+  font-family:Cinzel,Georgia,serif; font-size:12px; font-weight:600;
+  letter-spacing:.11em; text-transform:uppercase;
+}
+.back:hover{background:var(--tint)}
+.search{
+  flex:1; min-width:0; display:flex; align-items:center; gap:9px;
+  background:var(--panel); border:1px solid var(--line); border-radius:2px; padding:0 13px;
+}
+.search:focus-within{border-color:var(--dove)}
+.search input{
+  flex:1; min-width:0; border:0; background:transparent; color:var(--ink);
+  font:inherit; font-size:16px; padding:11px 0; outline:none;
+}
+.search input::placeholder{color:var(--ink-3)}
+.search svg{flex:none; color:var(--dove)}
+.clear{border:0; background:transparent; cursor:pointer; color:var(--ink-3); padding:4px; font-size:19px; line-height:1}
+
+/* ---------- dove divider (their .birdRule device) ---------- */
+.doverule{display:flex; align-items:center; gap:14px; margin:0}
+.doverule::before,.doverule::after{content:""; height:1px; background:var(--line); flex:1}
+.doverule svg{width:27px; height:30px; flex:none; --logo-bird:var(--dove)}
+
+/* ---------- masthead ---------- */
+.mast{padding:34px 0 0; text-align:center}
+.mast .eyebrow{display:block; margin-bottom:14px}
+.mast h1{
+  font-family:Cinzel,Georgia,serif; font-weight:500; font-size:clamp(27px,6.4vw,42px);
+  line-height:1.14; letter-spacing:.02em; text-transform:uppercase; color:var(--deep);
+}
+.mast .addr{margin:12px 0 20px; font-size:15.5px; color:var(--ink-2); font-style:italic}
+.team{
+  margin:22px 0 0; display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
+  gap:14px; text-align:left; background:var(--band); padding:16px 18px;
+}
+.team dt{font-family:Cinzel,Georgia,serif; font-size:10.5px; font-weight:600; letter-spacing:.13em; text-transform:uppercase; color:var(--head)}
+.team dd{margin:3px 0 0; font-size:14px; font-weight:600; color:var(--ink)}
+
+.rule{margin:24px 0 26px; background:var(--tint); padding:15px 17px; border-left:3px solid var(--deep)}
+.rule .eyebrow{color:var(--deep)}
+.rule p{margin-top:6px; font-size:14.5px; line-height:1.5}
+
+.stats{display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:var(--line); border:1px solid var(--line); margin-bottom:30px}
+.stat{background:var(--panel); padding:15px 14px; text-decoration:none; color:inherit; display:block; text-align:center}
+.stat:hover{background:var(--band)}
+.stat .n{font-family:Cinzel,Georgia,serif; font-size:29px; font-weight:500; line-height:1.1; color:var(--deep); font-variant-numeric:tabular-nums}
+.stat .l{font-family:Cinzel,Georgia,serif; font-size:10.5px; font-weight:600; letter-spacing:.13em; text-transform:uppercase; color:var(--head); margin-top:4px}
+.stat.is-open .n{color:var(--open)}
+
+/* ---------- floors + rooms ---------- */
+.floor{margin-bottom:34px}
+.floor-head{text-align:center; margin-bottom:14px}
+.floor-head h2{
+  font-family:Cinzel,Georgia,serif; font-size:19px; font-weight:600; letter-spacing:.13em;
+  text-transform:uppercase; color:var(--head); background:var(--ground);
+  display:inline-block; padding:0 16px; position:relative; z-index:1;
+}
+.floor-head .liner{height:1px; background:var(--line); margin-top:-11px}
+.floor-head span{display:block; margin-top:9px; font-size:12px; color:var(--ink-3); letter-spacing:.04em}
+.tiles{display:grid; grid-template-columns:repeat(auto-fill,minmax(210px,1fr)); gap:10px}
+.tile{
+  display:flex; align-items:center; justify-content:space-between; gap:10px;
+  background:var(--panel); border:1px solid var(--hair); border-radius:2px;
+  padding:14px 15px; text-decoration:none; color:inherit; min-height:60px;
+  transition:background-color .12s, box-shadow .12s;
+}
+.tile:hover{background:var(--tint); box-shadow:var(--shadow)}
+.tile > span{display:block; min-width:0}
+.tile .nm{display:block; font-weight:600; font-size:15px; line-height:1.3; color:var(--deep)}
+.tile .sub{display:block; font-size:11.5px; color:var(--ink-3); margin-top:4px; letter-spacing:.03em; font-variant-numeric:tabular-nums}
+.tile .rn{font-family:"IBM Plex Mono",monospace; font-size:10.5px; color:var(--head); border:1px solid var(--line); padding:1px 5px; margin-left:6px; vertical-align:2px}
+.dot{
+  flex:none; min-width:23px; height:23px; background:var(--open-bg); color:var(--open);
+  font-size:11.5px; font-weight:700; display:grid; place-items:center; padding:0 6px;
+  font-variant-numeric:tabular-nums; border-radius:2px;
+}
+
+/* ---------- room view ---------- */
+.room-head{padding:26px 0 4px}
+.room-head h1{
+  font-family:Cinzel,Georgia,serif; font-weight:500; font-size:clamp(25px,6vw,38px);
+  line-height:1.12; letter-spacing:.02em; text-transform:uppercase; color:var(--deep); margin-top:7px;
+}
+.room-nums{margin-top:12px; display:flex; flex-wrap:wrap; gap:6px}
+.chip{
+  display:inline-flex; align-items:center; font-size:11.5px; font-weight:600; letter-spacing:.05em;
+  padding:4px 10px; background:var(--band); color:var(--ink-2); border:1px solid var(--line); border-radius:2px;
+}
+.chip.o{background:var(--open-bg); color:var(--open); border-color:transparent}
+.chip.c{background:var(--done-bg); color:var(--done); border-color:transparent}
+.chip.a{background:var(--tint); color:var(--deep); border-color:transparent}
+
+section.blk{margin:28px 0}
+.blk > h2{
+  font-family:Cinzel,Georgia,serif; font-size:12.5px; font-weight:600; letter-spacing:.15em;
+  text-transform:uppercase; color:var(--head);
+  padding-bottom:9px; border-bottom:2px solid var(--dove); margin-bottom:2px;
+}
+
+.spec{display:grid; grid-template-columns:154px 1fr; gap:4px 18px; padding:14px 0; border-bottom:1px solid var(--line-soft)}
+.spec:last-child{border-bottom:0}
+.spec dt{font-size:12.5px; font-weight:700; color:var(--head); letter-spacing:.05em; text-transform:uppercase; padding-top:2px}
+.spec dd{margin:0; font-size:15.5px; line-height:1.45}
+.spec .note{margin-top:5px; font-size:13px; color:var(--ink-2); line-height:1.45}
+.spec .tags{margin-top:8px; display:flex; flex-wrap:wrap; gap:5px}
+.spec.hi{background:var(--tint); margin:0 -13px; padding:14px 13px; border-bottom:0; border-left:3px solid var(--deep)}
+@media (max-width:560px){
+  .spec{grid-template-columns:1fr; gap:3px}
+  .spec dt{font-size:11px}
+}
+
+.tbl-wrap{overflow-x:auto; -webkit-overflow-scrolling:touch; margin:0 -18px; padding:0 18px}
+table{border-collapse:collapse; width:100%; font-size:14px}
+th{
+  text-align:left; font-family:Cinzel,Georgia,serif; font-size:10.5px; font-weight:600;
+  letter-spacing:.11em; text-transform:uppercase; color:var(--head);
+  padding:9px 12px 9px 0; border-bottom:1px solid var(--line); white-space:nowrap;
+}
+td{padding:11px 12px 11px 0; border-bottom:1px solid var(--line-soft); vertical-align:top; line-height:1.45}
+tr:last-child td{border-bottom:0}
+td.num,th.num{font-variant-numeric:tabular-nums; text-align:right; padding-right:0; white-space:nowrap}
+.model{font-family:"IBM Plex Mono",ui-monospace,monospace; font-size:12.5px; letter-spacing:-.01em}
+
+.callout{background:var(--panel); border:1px solid var(--line); border-left:3px solid var(--dove); padding:14px 16px; margin-bottom:9px}
+.callout.o{border-left-color:var(--open)}
+.callout h3{font-family:Cinzel,Georgia,serif; font-size:14.5px; font-weight:600; letter-spacing:.04em; color:var(--deep); text-transform:uppercase}
+.callout p{font-size:13.5px; color:var(--ink-2); line-height:1.5; margin-top:5px}
+.callout .said{font-size:13px; color:var(--ink-3); margin-top:7px; font-style:italic}
+.callout .verdict{font-weight:700; color:var(--deep); font-size:15px; margin-top:7px}
+
+.empty{color:var(--ink-3); font-size:14.5px; padding:14px 0; font-style:italic}
+.list{list-style:none; margin:0; padding:0}
+.list li{padding:13px 0; border-bottom:1px solid var(--line-soft); font-size:14.5px; line-height:1.5}
+.list li:last-child{border-bottom:0}
+.list .meta{font-size:12.5px; color:var(--ink-3); margin-top:4px}
+
+details.legend{margin-top:14px; border-top:1px solid var(--line); padding-top:11px}
+details.legend summary{cursor:pointer; font-family:Cinzel,Georgia,serif; font-size:11.5px; font-weight:600; letter-spacing:.1em; text-transform:uppercase; color:var(--accent-ink); list-style:none}
+details.legend summary::-webkit-details-marker{display:none}
+details.legend summary::before{content:"+ "}
+details.legend[open] summary::before{content:"– "}
+details.legend dl{margin:12px 0 0; display:grid; grid-template-columns:auto 1fr; gap:7px 15px; font-size:13px}
+details.legend dt{font-weight:600; color:var(--ink-2); white-space:nowrap}
+details.legend dd{margin:0; color:var(--ink-2); line-height:1.45}
+
+.hits{font-size:13px; color:var(--ink-3); margin:18px 0 12px; letter-spacing:.03em}
+.hit-room{margin-bottom:24px}
+.hit-room .fl{font-family:Cinzel,Georgia,serif; font-size:10.5px; letter-spacing:.13em; text-transform:uppercase; color:var(--head); font-weight:600}
+.hit-room h3{font-family:Cinzel,Georgia,serif; font-size:16px; font-weight:600; letter-spacing:.03em; text-transform:uppercase; margin-top:2px}
+.hit-room h3 a{text-decoration:none; color:var(--deep)}
+mark{background:var(--tint-2); color:var(--ink); padding:0 2px}
+
+/* ---------- footer (their grey band + dove rule) ---------- */
+.pagefoot{margin-top:46px; background:var(--grey); border-top:4px solid var(--blue); padding:28px 18px 30px; text-align:center}
+.pagefoot .lockup{width:170px; margin:0 auto 14px; --logo-bird:#ffffff; --logo-type:#ffffff}
+.pagefoot p{color:rgba(255,255,255,.82); font-size:12.5px; line-height:1.65; max-width:52ch; margin:0 auto}
+.pagefoot .tag{font-family:Cinzel,Georgia,serif; font-size:11px; letter-spacing:.15em; text-transform:uppercase; color:#fff; margin-bottom:9px}
+
+@media print{
+  .bar,.pagefoot{position:static}
+  body{background:#fff}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none !important; animation:none !important}}
+</style>
+
+__LOGO_DEFS__
+
+<div class="brandbar">
+  <div class="in"><svg class="lockup" viewBox="0 0 596.4 222.4" role="img" aria-label="Achristavest Fine Home Builders"><use href="#acv-lockup"/></svg></div>
+</div>
+
+<div class="bar">
+  <div class="bar-in">
+    <a class="back" href="#/" id="backBtn" hidden>
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+      Rooms
+    </a>
+    <label class="search">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5" stroke-linecap="round"/></svg>
+      <input id="q" type="search" placeholder="Search any finish, model or room" autocomplete="off" spellcheck="false" aria-label="Search all selections">
+      <button class="clear" id="clearBtn" hidden aria-label="Clear search">&times;</button>
+    </label>
+  </div>
+</div>
+
+<main class="wrap" id="app"></main>
+
+<footer class="pagefoot">
+  <svg class="lockup" viewBox="0 0 596.4 222.4" role="img" aria-label="Achristavest Fine Home Builders"><use href="#acv-lockup"/></svg>
+  <p class="tag">Built by Achristavest</p>
+  <p>Room-by-room specifications for 3704 Waterview Boulevard. Verify all model numbers against the cut sheets before ordering. Where the booklet and the plans disagree, the design booklet governs.</p>
+</footer>
+
+<script id="specdata" type="application/json">__DATA__</script>
+<script>
+(function(){
+"use strict";
+var D = JSON.parse(document.getElementById('specdata').textContent);
+var app = document.getElementById('app');
+var qEl = document.getElementById('q');
+var clearBtn = document.getElementById('clearBtn');
+var backBtn = document.getElementById('backBtn');
+// the symbol re-establishes its own coordinate system, so the outer viewBox starts at 0,0
+var DOVE = '<svg viewBox="0 0 47 54" aria-hidden="true"><use href="#acv-dove"/></svg>';
+
+function esc(s){
+  return String(s==null?'':s).replace(/[&<>"']/g,function(c){
+    return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];
+  });
+}
+function roomByKey(k){
+  for(var i=0;i<D.rooms.length;i++) if(D.rooms[i].key===k) return D.rooms[i];
+  return null;
+}
+function openCount(r){
+  var n=0; for(var i=0;i<r.openItems.length;i++) if(r.openItems[i].status==='OPEN') n++;
+  return n;
+}
+function roomNumbers(r){
+  var out=[]; for(var i=0;i<r.schedule.length;i++){
+    if(out.indexOf(r.schedule[i].no)<0) out.push(r.schedule[i].no);
+  } return out;
+}
+function sourceChip(src, flag){
+  var out='';
+  if(flag==='DECISION') out+='<span class="chip a">Your decision</span>';
+  else if(flag==='NEW') out+='<span class="chip">From permit set</span>';
+  if(src && src!=='Booklet' && flag!=='DECISION') out+='<span class="chip">'+esc(src)+'</span>';
+  return out;
+}
+
+/* ---------------- home ---------------- */
+function viewHome(){
+  var p=D.project, h='';
+  h+='<header class="mast">';
+  h+='<span class="eyebrow">Build Specifications</span>';
+  h+='<h1>'+esc(p.name)+'</h1>';
+  h+='<p class="addr">'+esc(p.address)+'</p>';
+  h+='<div class="doverule">'+DOVE+'</div>';
+  h+='<dl class="team">';
+  h+='<div><dt>Builder</dt><dd>'+esc(p.builder)+'</dd></div>';
+  h+='<div><dt>Architect</dt><dd>'+esc(p.architect)+'</dd></div>';
+  h+='<div><dt>Interiors</dt><dd>'+esc(p.interiors)+'</dd></div>';
+  h+='</dl></header>';
+
+  h+='<div class="rule"><span class="eyebrow">If two documents disagree</span><p>'+esc(p.rule)+'</p></div>';
+
+  var totalOpen=0; for(var i=0;i<D.openItems.length;i++) if(D.openItems[i].status==='OPEN') totalOpen++;
+  var realRooms=0; for(var j=0;j<D.rooms.length;j++) if(D.rooms[j].floor!=='Whole House') realRooms++;
+  h+='<div class="stats">';
+  h+='<div class="stat"><div class="n">'+realRooms+'</div><div class="l">Areas</div></div>';
+  h+='<a class="stat is-open" href="#/open"><div class="n">'+totalOpen+'</div><div class="l">Open</div></a>';
+  h+='<a class="stat" href="#/decisions"><div class="n">'+D.decisions.length+'</div><div class="l">Decisions</div></a>';
+  h+='</div>';
+
+  for(var f=0; f<D.floors.length; f++){
+    var fl=D.floors[f];
+    var rs=D.rooms.filter(function(r){return r.floor===fl;});
+    if(!rs.length) continue;
+    h+='<section class="floor"><div class="floor-head"><h2>'+esc(fl)+'</h2><div class="liner"></div>';
+    h+='<span>'+rs.length+(fl==='Whole House'?' standards':' areas')+'</span></div><div class="tiles">';
+    for(var k=0;k<rs.length;k++){
+      var r=rs[k], oc=openCount(r), nums=roomNumbers(r);
+      h+='<a class="tile" href="#/room/'+encodeURIComponent(r.key)+'"><span>';
+      h+='<span class="nm">'+esc(r.name)+(nums.length?'<span class="rn">'+esc(nums.join(', '))+'</span>':'')+'</span>';
+      h+='<span class="sub">'+r.itemCount+' spec'+(r.itemCount===1?'':'s')+'</span></span>';
+      if(oc) h+='<span class="dot" title="'+oc+' open">'+oc+'</span>';
+      h+='</a>';
+    }
+    h+='</div></section>';
+  }
+
+  h+='<section class="floor"><div class="floor-head"><h2>Reference</h2><div class="liner"></div></div><div class="tiles">';
+  h+='<a class="tile" href="#/standards"><span><span class="nm">House-wide standards</span><span class="sub">Siding, roof, trim, doors, lighting</span></span></a>';
+  h+='<a class="tile" href="#/decisions"><span><span class="nm">Decisions &amp; conflicts</span><span class="sub">All '+D.decisions.length+' settled</span></span></a>';
+  h+='<a class="tile" href="#/open"><span><span class="nm">Open items</span><span class="sub">'+totalOpen+' still to select</span></span></a>';
+  h+='<a class="tile" href="#/trim"><span><span class="nm">Trim &amp; millwork scope</span><span class="sub">'+D.trim.length+' line items</span></span></a>';
+  h+='</div></section>';
+  return h;
+}
+
+/* ---------------- room ---------------- */
+function viewRoom(key){
+  var r=roomByKey(key);
+  if(!r) return '<header class="room-head"><h1>Room not found</h1></header><p class="empty">Go back and pick a room from the list.</p>';
+  var h='', nums=roomNumbers(r), oc=openCount(r);
+
+  h+='<header class="room-head"><span class="eyebrow">'+esc(r.floor)+'</span><h1>'+esc(r.name)+'</h1><div class="room-nums">';
+  if(nums.length) h+='<span class="chip mono">Room '+esc(nums.join(' / '))+'</span>';
+  if(oc) h+='<span class="chip o">'+oc+' open item'+(oc===1?'':'s')+'</span>';
+  if(r.decisions.length) h+='<span class="chip a">'+r.decisions.length+' decision'+(r.decisions.length===1?'':'s')+'</span>';
+  h+='</div></header>';
+
+  if(r.decisions.length){
+    h+='<section class="blk"><h2>Decisions that govern this room</h2>';
+    for(var d=0;d<r.decisions.length;d++){
+      var dec=r.decisions[d];
+      h+='<div class="callout"><h3>'+esc(dec.item)+'</h3>';
+      h+='<div class="said">Documents said: '+esc(dec.said)+'</div>';
+      h+='<div class="verdict">&rarr; '+esc(dec.decision)+'</div>';
+      if(dec.basis) h+='<p>'+esc(dec.basis)+'</p>';
+      h+='</div>';
+    }
+    h+='</section>';
+  }
+
+  if(r.selections.length){
+    h+='<section class="blk"><h2>Finishes &amp; selections</h2><dl>';
+    for(var s=0;s<r.selections.length;s++){
+      var it=r.selections[s];
+      h+='<div class="spec'+(it.flag==='DECISION'?' hi':'')+'"><dt>'+esc(it.category)+'</dt><dd>'+esc(it.selection);
+      if(it.notes) h+='<div class="note">'+esc(it.notes)+'</div>';
+      var tags=sourceChip(it.source,it.flag);
+      if(it.ref) tags='<span class="chip mono">'+esc(/^\d+$/.test(it.ref)?'Booklet p'+it.ref:it.ref)+'</span>'+tags;
+      if(tags) h+='<div class="tags">'+tags+'</div>';
+      h+='</dd></div>';
+    }
+    h+='</dl></section>';
+  }
+
+  if(r.schedule.length){
+    h+='<section class="blk"><h2>Architect&rsquo;s finish schedule</h2><div class="tbl-wrap"><table>';
+    h+='<thead><tr><th>Room</th><th>Floor</th><th>Base</th><th>Walls</th><th>Ceiling</th><th>Clg ht</th><th>Rem.</th></tr></thead><tbody>';
+    var codes={};
+    for(var q=0;q<r.schedule.length;q++){
+      var e=r.schedule[q];
+      h+='<tr><td><b>'+esc(e.no)+'</b> '+esc(e.roomName)+'</td><td>'+esc(e.floorFin)+'</td><td>'+esc(e.base)+'</td><td>'+esc(e.walls)+'</td><td>'+esc(e.ceiling)+'</td><td class="mono">'+esc(e.clgHt)+'</td><td class="mono">'+esc(e.remarks||'—')+'</td></tr>';
+      if(e.remarks) e.remarks.split(',').forEach(function(c){codes[c.trim()]=1;});
+      if(e.override) h+='<tr><td colspan="7" style="color:var(--deep);font-weight:700">Override: '+esc(e.override)+'</td></tr>';
+    }
+    h+='</tbody></table></div>';
+    h+='<details class="legend"><summary>What these codes mean</summary><dl>';
+    for(var L=0;L<D.legend.length;L++) h+='<dt class="mono">'+esc(D.legend[L].code)+'</dt><dd>'+esc(D.legend[L].meaning)+'</dd>';
+    for(var M=0;M<D.remarks.length;M++){
+      var rk=D.remarks[M].code, base=String(rk).split(' ')[0];
+      if(codes[base]) h+='<dt class="mono">Rem. '+esc(rk)+'</dt><dd>'+esc(D.remarks[M].text)+'</dd>';
+    }
+    h+='</dl></details></section>';
+  }
+
+  if(r.plumbing.length){
+    h+='<section class="blk"><h2>Plumbing &amp; appliances</h2><div class="tbl-wrap"><table>';
+    h+='<thead><tr><th>Item</th><th>Manufacturer &amp; model</th><th>Finish</th><th class="num">Qty</th></tr></thead><tbody>';
+    for(var pi=0;pi<r.plumbing.length;pi++){
+      var pl=r.plumbing[pi];
+      h+='<tr><td><b>'+esc(pl.type)+'</b></td><td class="model">'+esc(pl.model)+'</td><td>'+esc(pl.finish||'—')+'</td><td class="num">'+esc(pl.qty||'')+'</td></tr>';
+    }
+    h+='</tbody></table></div></section>';
+  }
+
+  if(r.lighting.length){
+    h+='<section class="blk"><h2>Lighting</h2><div class="tbl-wrap"><table>';
+    h+='<thead><tr><th>Type</th><th>Fixture</th><th class="num">Qty</th></tr></thead><tbody>';
+    for(var li=0;li<r.lighting.length;li++){
+      var lt=r.lighting[li];
+      h+='<tr><td><b>'+esc(lt.type)+'</b></td><td>'+esc(lt.description);
+      if(lt.notes) h+='<div style="font-size:12.5px;color:var(--ink-3);margin-top:3px">'+esc(lt.notes)+'</div>';
+      h+='</td><td class="num">'+esc(lt.qty||'')+'</td></tr>';
+    }
+    h+='</tbody></table></div></section>';
+  }
+
+  if(r.trim.length){
+    h+='<section class="blk"><h2>Trim &amp; millwork in scope</h2><ul class="list">';
+    for(var ti=0;ti<r.trim.length;ti++){
+      var tr=r.trim[ti], m=[];
+      h+='<li>'+esc(tr.line);
+      if(tr.material) m.push(tr.material);
+      if(tr.qty) m.push('Qty '+tr.qty);
+      if(m.length) h+='<div class="meta">'+esc(m.join(' · '))+'</div>';
+      if(tr.note) h+='<div class="meta" style="color:var(--deep);font-weight:600">'+esc(tr.note)+'</div>';
+      h+='</li>';
+    }
+    h+='</ul></section>';
+  }
+
+  if(r.openItems.length){
+    var openOnes=r.openItems.filter(function(i){return i.status==='OPEN';});
+    var closedOnes=r.openItems.filter(function(i){return i.status!=='OPEN';});
+    h+='<section class="blk"><h2>Open items &amp; questions</h2>';
+    if(!openOnes.length) h+='<p class="empty">Nothing open in this room.</p>';
+    for(var oi=0;oi<openOnes.length;oi++){
+      var o=openOnes[oi];
+      h+='<div class="callout o"><h3>'+esc(o.item)+'</h3><p>'+esc(o.detail||o.type)+'</p>';
+      h+='<div class="room-nums" style="margin-top:9px"><span class="chip o">Open</span><span class="chip">'+esc(o.type)+'</span></div></div>';
+    }
+    if(closedOnes.length){
+      h+='<details class="legend"><summary>'+closedOnes.length+' already closed</summary><ul class="list" style="margin-top:8px">';
+      for(var ci=0;ci<closedOnes.length;ci++){
+        h+='<li>'+esc(closedOnes[ci].item)+'<div class="meta">Closed by '+esc(closedOnes[ci].closedBy||'client decision')+'</div></li>';
+      }
+      h+='</ul></details>';
+    }
+    h+='</section>';
+  }
+  return h;
+}
+
+/* ---------------- reference views ---------------- */
+function viewOpen(){
+  var items=D.openItems.filter(function(i){return i.status==='OPEN';});
+  var h='<header class="room-head"><span class="eyebrow">Reference</span><h1>Open items</h1><div class="room-nums"><span class="chip o">'+items.length+' still to select or confirm</span></div></header>';
+  for(var f=0;f<D.floors.length;f++){
+    var fl=D.floors[f], rs=items.filter(function(i){return i.floor===fl;});
+    if(!rs.length) continue;
+    h+='<section class="blk"><h2>'+esc(fl)+'</h2><ul class="list">';
+    for(var i=0;i<rs.length;i++){
+      h+='<li><b>'+esc(rs[i].item)+'</b> — '+esc(rs[i].detail||rs[i].type)+'<div class="meta">'+esc(rs[i].room)+' · '+esc(rs[i].type)+'</div></li>';
+    }
+    h+='</ul></section>';
+  }
+  return h;
+}
+function viewDecisions(){
+  var h='<header class="room-head"><span class="eyebrow">Reference</span><h1>Decisions</h1><div class="room-nums"><span class="chip c">All '+D.decisions.length+' conflicts settled</span></div></header>';
+  h+='<div class="rule"><span class="eyebrow">Governing rule</span><p>'+esc(D.project.rule)+'</p></div><section class="blk">';
+  for(var i=0;i<D.decisions.length;i++){
+    var d=D.decisions[i];
+    h+='<div class="callout"><h3>'+esc(d.item)+'</h3>';
+    h+='<div class="said">Documents said: '+esc(d.said)+'</div>';
+    h+='<div class="verdict">&rarr; '+esc(d.decision)+'</div>';
+    h+=(d.basis?'<p>'+esc(d.basis)+'</p>':'')+'</div>';
+  }
+  return h+'</section>';
+}
+function viewStandards(){
+  var h='<header class="room-head"><span class="eyebrow">Reference</span><h1>House-wide standards</h1></header>';
+  h+='<section class="blk"><h2>Applies throughout</h2><dl>';
+  for(var i=0;i<D.standards.length;i++){
+    var s=D.standards[i];
+    h+='<div class="spec"><dt>'+esc(s.item)+'</dt><dd>'+esc(s.spec);
+    if(s.ref) h+='<div class="tags"><span class="chip mono">'+esc(s.ref)+'</span></div>';
+    h+='</dd></div>';
+  }
+  h+='</dl></section><section class="blk"><h2>Finish schedule legend</h2><dl>';
+  for(var L=0;L<D.legend.length;L++) h+='<div class="spec"><dt class="mono">'+esc(D.legend[L].code)+'</dt><dd>'+esc(D.legend[L].meaning)+'</dd></div>';
+  h+='</dl></section><section class="blk"><h2>Schedule remarks</h2><dl>';
+  for(var M=0;M<D.remarks.length;M++) h+='<div class="spec"><dt class="mono">Remark '+esc(D.remarks[M].code)+'</dt><dd>'+esc(D.remarks[M].text)+'</dd></div>';
+  h+='</dl></section><section class="blk"><h2>Allowance categories</h2><ul class="list">';
+  for(var A=0;A<D.allowances.length;A++) h+='<li>'+esc(D.allowances[A])+'</li>';
+  return h+'</ul><p class="empty">Amounts are not carried in this book.</p></section>';
+}
+function viewTrim(){
+  var h='<header class="room-head"><span class="eyebrow">Reference</span><h1>Trim &amp; millwork</h1><div class="room-nums"><span class="chip">'+D.trim.length+' line items</span></div></header>';
+  var secs=[];
+  for(var i=0;i<D.trim.length;i++) if(secs.indexOf(D.trim[i].section)<0) secs.push(D.trim[i].section);
+  for(var s=0;s<secs.length;s++){
+    h+='<section class="blk"><h2>'+esc(secs[s])+'</h2><ul class="list">';
+    var rows=D.trim.filter(function(t){return t.section===secs[s];});
+    for(var r=0;r<rows.length;r++){
+      var m=[];
+      h+='<li>'+esc(rows[r].line);
+      if(rows[r].material) m.push(rows[r].material);
+      if(rows[r].qty) m.push('Qty '+rows[r].qty);
+      if(m.length) h+='<div class="meta">'+esc(m.join(' · '))+'</div>';
+      if(rows[r].note) h+='<div class="meta" style="color:var(--deep);font-weight:600">'+esc(rows[r].note)+'</div>';
+      h+='</li>';
+    }
+    h+='</ul></section>';
+  }
+  return h;
+}
+
+/* ---------------- search ---------------- */
+function hl(text, term){
+  var t=String(text==null?'':text), i=t.toLowerCase().indexOf(term);
+  if(i<0) return esc(t);
+  return esc(t.slice(0,i))+'<mark>'+esc(t.slice(i,i+term.length))+'</mark>'+esc(t.slice(i+term.length));
+}
+function viewSearch(term){
+  var t=term.toLowerCase(), out=[], total=0;
+  for(var i=0;i<D.rooms.length;i++){
+    var r=D.rooms[i], hits=[];
+    r.selections.forEach(function(s){
+      if((s.category+' '+s.selection+' '+s.notes).toLowerCase().indexOf(t)>=0) hits.push({l:s.category,v:s.selection,n:s.notes});
+    });
+    r.plumbing.forEach(function(p){
+      if((p.type+' '+p.model+' '+p.finish).toLowerCase().indexOf(t)>=0) hits.push({l:p.type,v:p.model,n:p.finish,mono:true});
+    });
+    r.lighting.forEach(function(l){
+      if((l.type+' '+l.description).toLowerCase().indexOf(t)>=0) hits.push({l:l.type,v:l.description,n:l.notes});
+    });
+    r.trim.forEach(function(x){ if(x.line.toLowerCase().indexOf(t)>=0) hits.push({l:'Millwork',v:x.line,n:x.material}); });
+    r.openItems.forEach(function(o){
+      if((o.item+' '+o.detail).toLowerCase().indexOf(t)>=0) hits.push({l:'Open item',v:o.item,n:o.detail});
+    });
+    var nameHit=r.name.toLowerCase().indexOf(t)>=0;
+    if(hits.length||nameHit){ out.push({room:r,hits:hits}); total+=hits.length; }
+  }
+  var h='<p class="hits">'+(out.length?total+' match'+(total===1?'':'es')+' in '+out.length+' area'+(out.length===1?'':'s'):'Nothing matches &ldquo;'+esc(term)+'&rdquo;. Try a room name, a paint colour, or part of a model number.')+'</p>';
+  for(var o2=0;o2<out.length;o2++){
+    var e=out[o2];
+    h+='<div class="hit-room"><div class="fl">'+esc(e.room.floor)+'</div>';
+    h+='<h3><a href="#/room/'+encodeURIComponent(e.room.key)+'">'+hl(e.room.name,t)+' &rarr;</a></h3>';
+    if(e.hits.length){
+      h+='<dl>';
+      for(var k=0;k<Math.min(e.hits.length,8);k++){
+        var x=e.hits[k];
+        h+='<div class="spec"><dt>'+esc(x.l)+'</dt><dd'+(x.mono?' class="model"':'')+'>'+hl(x.v,t);
+        if(x.n) h+='<div class="note">'+hl(x.n,t)+'</div>';
+        h+='</dd></div>';
+      }
+      h+='</dl>';
+      if(e.hits.length>8) h+='<p class="hits">+'+(e.hits.length-8)+' more in this room</p>';
+    }
+    h+='</div>';
+  }
+  return h;
+}
+
+/* ---------------- router ---------------- */
+function render(){
+  var term=qEl.value.trim();
+  clearBtn.hidden=!term;
+  var hash=location.hash.replace(/^#/,'')||'/';
+  if(term){ backBtn.hidden=false; app.innerHTML=viewSearch(term); return; }
+  backBtn.hidden=(hash==='/');
+  if(hash.indexOf('/room/')===0) app.innerHTML=viewRoom(decodeURIComponent(hash.slice(6)));
+  else if(hash==='/open') app.innerHTML=viewOpen();
+  else if(hash==='/decisions') app.innerHTML=viewDecisions();
+  else if(hash==='/standards') app.innerHTML=viewStandards();
+  else if(hash==='/trim') app.innerHTML=viewTrim();
+  else app.innerHTML=viewHome();
+  window.scrollTo(0,0);
+}
+var timer;
+qEl.addEventListener('input', function(){ clearTimeout(timer); timer=setTimeout(render,120); });
+clearBtn.addEventListener('click', function(){ qEl.value=''; render(); qEl.focus(); });
+backBtn.addEventListener('click', function(){ if(qEl.value) qEl.value=''; });
+window.addEventListener('hashchange', function(){ if(qEl.value) qEl.value=''; render(); });
+render();
+})();
+</script>
