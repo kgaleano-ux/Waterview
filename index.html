@@ -10,42 +10,19 @@
    Achristavest brand system, taken from achristavest.com:
    dove #7cb2ca / #7eb7d0, wordmark grey #58595b, deep teal #003b49,
    heading blue #6c93a6, tints #e9f0f3 / #cee3eb / #dcedf4,
-   Cinzel headings + Open Sans body.
+   Cinzel headings + Open Sans body. Light theme only.
    ------------------------------------------------------------------ */
 :root{
+  color-scheme: light;   /* light only - a job-site page should look the same on every phone */
   --dove:#7cb2ca; --blue:#7eb7d0; --deep:#003b49; --slate:#61718a;
   --head:#6c93a6; --grey:#58595b;
-  --ground:#FFFFFF; --band:#e9f0f3; --panel:#FFFFFF; --tint:#dcedf4; --tint-2:#cee3eb;
+  --ground:#FAFCFD; --band:#EDF3F6; --panel:#FFFFFF; --tint:#dcedf4; --tint-2:#cee3eb;
   --ink:#3c3d3f; --ink-2:#6b6c6f; --ink-3:#95999c;
   --line:#dbe5ea; --hair:#7cb2ca; --line-soft:#e8eef1;
   --accent:#4d8ba6; --accent-ink:#3d7a95;
   --open:#b32d3c; --open-bg:#fbecec;
   --done:#00596b; --done-bg:#e2eff2;
   --shadow:0 1px 2px rgba(0,59,73,.05), 0 6px 18px rgba(0,59,73,.05);
-}
-@media (prefers-color-scheme: dark){
-  :root:not([data-theme="light"]){
-    --dove:#7cb2ca; --blue:#8dc0d6; --deep:#a9d3e0; --slate:#93a3bb;
-    --head:#8fc0d4; --grey:#c9cbcd;
-    --ground:#13181B; --band:#182025; --panel:#1B2429; --tint:#1c2c33; --tint-2:#20323a;
-    --ink:#E4E6E7; --ink-2:#A6AFB4; --ink-3:#7b868c;
-    --line:#2b383e; --hair:#3f6474; --line-soft:#232f34;
-    --accent:#8dc0d6; --accent-ink:#a2cfe2;
-    --open:#e98b83; --open-bg:#33201f;
-    --done:#7fbcc9; --done-bg:#16292f;
-    --shadow:0 1px 2px rgba(0,0,0,.4), 0 6px 18px rgba(0,0,0,.32);
-  }
-}
-:root[data-theme="dark"]{
-  --dove:#7cb2ca; --blue:#8dc0d6; --deep:#a9d3e0; --slate:#93a3bb;
-  --head:#8fc0d4; --grey:#c9cbcd;
-  --ground:#13181B; --band:#182025; --panel:#1B2429; --tint:#1c2c33; --tint-2:#20323a;
-  --ink:#E4E6E7; --ink-2:#A6AFB4; --ink-3:#7b868c;
-  --line:#2b383e; --hair:#3f6474; --line-soft:#232f34;
-  --accent:#8dc0d6; --accent-ink:#a2cfe2;
-  --open:#e98b83; --open-bg:#33201f;
-  --done:#7fbcc9; --done-bg:#16292f;
-  --shadow:0 1px 2px rgba(0,0,0,.4), 0 6px 18px rgba(0,0,0,.32);
 }
 
 *{box-sizing:border-box}

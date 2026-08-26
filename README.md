@@ -32,8 +32,13 @@ site's own SVG, and the palette and typography are taken from its stylesheet.
 | Deep teal | `#003b49` | Headings, room names, decisions |
 | Heading blue | `#6c93a6` | Section labels, eyebrows |
 | Wordmark grey | `#58595b` | Wordmark, footer band |
-| Tints | `#e9f0f3` `#dcedf4` `#cee3eb` | Panels and callouts |
+| Tints | `#EDF3F6` `#dcedf4` `#cee3eb` | Panels and callouts |
+| Ground | `#FAFCFD` | Page background, with `#FFFFFF` cards on top |
 | Type | Cinzel + Open Sans | Headings + body |
+
+The page is light only. It sets `color-scheme: light` and defines no dark
+palette, so it looks the same on every phone regardless of the viewer's
+system theme - a spec read on a job site should not change appearance.
 
 IBM Plex Mono is added for model numbers, so strings like `T535916-4G-2MB`
 are read correctly on a phone.
