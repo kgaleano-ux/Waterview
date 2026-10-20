@@ -19,10 +19,15 @@ The file names match the old site, so existing links and bookmarks still work
 after the switch.
 
 Shared files: `assets/site.css` (all styling), `assets/site.js` (mobile menu,
-photo viewer, ticket search), `assets/favicon.svg`. The header and footer are
+photo viewer, ticket search), `assets/logo.svg` (the department badge) and
+`assets/favicon.svg`. The header and footer are
 repeated in each page, so a change to them has to be made in all six files.
 
 ## What changed from the old site
+
+- The logo is the department's Maltese-cross badge (Avalon / F 11 D /
+  Volunteer), redrawn as a vector from the shirt print in navy and gold. The
+  lettering is converted to shapes, so it looks the same on every device.
 
 - Responsive layout with a mobile menu, a sticky header and a "Call 911" strip.
 - Photos are resized and compressed (all images together come to about 6.5 MB).
